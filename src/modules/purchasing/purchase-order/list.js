@@ -15,23 +15,23 @@ export class List {
     context = ["Rincian"]
 
     columns = [
-        { field: "DivisionName", title: "Divisi" },
-        { field: "UnitName", title: "Unit" },
-        { field: "CategoryName", title: "Kategori" },
-        { field: "PRNo", title: "No. PR" },
+        { field: "unit.division.name", title: "Divisi" },
+        { field: "unit.name", title: "Unit" },
+        { field: "category.name", title: "Kategori" },
+        { field: "purchaseRequest.no", title: "No. PR" },
         {
-            field: "PRDate", title: "Tgl. PR", formatter: function (value, data, index) {
+            field: "purchaseRequest.date", title: "Tgl. PR", formatter: function (value, data, index) {
                 return moment(value).format("DD MMM YYYY");
             }
         },
         {
-            field: "ExpectedDeliveryDate", title: "Tgl. Diminta Datang", formatter: function (value, data, index) {
+            field: "purchaseRequest.expectedDeliveryDate", title: "Tgl. Diminta Datang", formatter: function (value, data, index) {
                 return moment(value).format("DD MMM YYYY");
             }
         },
-        { field: "CreatedBy", title: "Staff Pembelian" },
+        { field: "_createdBy", title: "Staff Pembelian" },
         {
-            field: "IsPosted", title: "Posted",
+            field: "isPosted", title: "Posted",
             formatter: function (value, row, index) {
                 return value ? "SUDAH" : "BELUM";
             }
@@ -66,10 +66,9 @@ export class List {
     contextClickCallback(event) {
         var arg = event.detail;
         var data = arg.data;
-        
         switch (arg.name) {
             case "Rincian":
-                this.router.navigateToRoute('view', { id: data.Id });
+                this.router.navigateToRoute('view', { id: data._id });
                 break;
         }
     }

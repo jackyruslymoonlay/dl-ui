@@ -1,43 +1,42 @@
 import { inject } from 'aurelia-framework';
-import { Service } from "./service";
+// import { Service } from "./services/service";
 import { Router } from 'aurelia-router';
 
-@inject(Router, Service)
+@inject(Router)
 export class List {
-    context = ["Detail", "Cetak PDF", "Cetak Budget"];
+    context = ["Detail"];
     columns = [
-        { field: "RO_Number", title: "No RO" },
+        { field: "RO", title: "No RO" },
         { field: "Article", title: "Artikel" },
-        { field: "Convection", title: "Konveksi" },
+        { field: "Line.Name", title: "Line" },
         { field: "Quantity", title: "Kuantitas" },
         { field: "ConfirmPrice", title: "Harga Konfirmasi" }
     ];
 
-    loader = (info) => {
-        var order = {};
+    // loader = (info) => {
+    //     var order = {};
 
-        if (info.sort)
-            order[info.sort] = info.order;
+    //     if (info.sort)
+    //         order[info.sort] = info.order;
 
-        var arg = {
-            page: parseInt(info.offset / info.limit, 10) + 1,
-            size: info.limit,
-            keyword: info.search,
-            order: order
-        }
+    //     var arg = {
+    //         page: parseInt(info.offset / info.limit, 10) + 1,
+    //         size: info.limit,
+    //         keyword: info.search,
+    //         order: order
+    //     }
 
-        return this.service.search(arg)
-            .then(result => {
-                console.log(result)
-                return {
-                    total: result.info.total,
-                    data: result.data
-                }
-            });
-    }
+    //     return this.service.search(arg)
+    //         .then(result => {
+    //             return {
+    //                 total: result.info.total,
+    //                 data: result.data
+    //             }
+    //         });
+    // }
 
-    constructor(router, service) {
-        this.service = service;
+    constructor(router) {
+        // this.service = service;
         this.router = router;
     }
 
@@ -47,12 +46,6 @@ export class List {
         switch (arg.name) {
             case "Detail":
                 this.router.navigateToRoute('view', { id: data.Id });
-                break;
-            case "Cetak PDF":
-                this.service.getPdfById(data.Id)
-                break;
-            case "Cetak Budget":
-                this.service.getBudgetById(data.Id)
                 break;
         }
     }
