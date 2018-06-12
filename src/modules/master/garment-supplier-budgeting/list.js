@@ -15,12 +15,6 @@ export class List {
       formatter: function (value, row, index) {
         return value ? "YA" : "TIDAK";
       }
-    },
-    {
-      field: "useIncomeTax", title: "Kena PPN",
-      formatter: function (value, row, index) {
-        return value ? "YA" : "TIDAK";
-      }
     }
   ];
 
@@ -33,7 +27,7 @@ export class List {
       page: parseInt(info.offset / info.limit, 10) + 1,
       size: info.limit,
       keyword: info.search,
-      select:["code","name","address","import","NPWP","useIncomeTax"],
+      select:["code","name","address","import","NPWP"],
       order: order
     }
 
