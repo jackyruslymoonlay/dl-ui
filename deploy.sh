@@ -9,8 +9,3 @@ git clone https://${GH_TOKEN}@github.com/danliris/danliris.github.io.git out
 
 cp -a dist/. out/.
 cd out
-
-git add .
-git commit -m "Automated Deployment"
-
-git push origin master
